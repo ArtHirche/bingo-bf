@@ -1,0 +1,575 @@
+/* ==========================================================================
+   BINGO PIRATA DOS SETE MARES - DESIGN SYSTEM & ESTILOS GLOBAIS
+   ========================================================================== */
+
+:root {
+  /* Paleta de Cores Piratas Nobres */
+  --wood-dark: #120b06;
+  --wood-medium: #22140a;
+  --wood-light: #3a2212;
+  --wood-border: #59351d;
+  --wood-highlight: #7c4b28;
+
+  --parchment-bg: #f5e6cb;
+  --parchment-dark: #dfc89f;
+  --parchment-text: #2c1a0e;
+  --parchment-border: #b89868;
+
+  --gold-primary: #f59e0b;
+  --gold-light: #fbbf24;
+  --gold-glow: #fde047;
+  --gold-dark: #b45309;
+
+  --crimson-red: #dc2626;
+  --crimson-dark: #991b1b;
+  --crimson-glow: #ef4444;
+
+  --ocean-blue: #0f2b38;
+  --ocean-deep: #07151d;
+  --ocean-teal: #0d9488;
+  --ocean-glow: #14b8a6;
+
+  --bone-white: #f3f4f6;
+  --ink-black: #0d0906;
+
+  /* Fontes */
+  --font-pirate: 'Pirata One', cursive;
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-gothic: 'MedievalSharp', cursive;
+
+  /* Efeitos */
+  --shadow-gold: 0 0 25px rgba(245, 158, 11, 0.4);
+  --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.65);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--wood-dark);
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(26, 17, 9, 0.85) 0%, rgba(10, 6, 3, 0.98) 100%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233a2212' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+  color: var(--bone-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA E TÍTULOS
+   ========================================================================== */
+
+h1, h2, h3, .pirate-title {
+  font-family: var(--font-title);
+  letter-spacing: 0.05em;
+}
+
+.pirate-hero-font {
+  font-family: var(--font-pirate);
+  letter-spacing: 2px;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+.crimson-gradient-text {
+  background: linear-gradient(135deg, #fca5a5 0%, #dc2626 50%, #991b1b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   CONTAINERS E CARDS PIRATAS
+   ========================================================================== */
+
+.pirate-panel {
+  background: linear-gradient(180deg, #2b180c 0%, #1c0f07 100%);
+  border: 2px solid var(--wood-border);
+  border-radius: var(--radius-md);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 25px rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.pirate-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+}
+
+.parchment-card {
+  background-color: var(--parchment-bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(200, 160, 100, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(180, 130, 70, 0.3) 0%, transparent 50%),
+    linear-gradient(to bottom, #f7ebd7 0%, #ebd7b5 100%);
+  border: 4px double var(--parchment-border);
+  border-radius: var(--radius-md);
+  color: var(--parchment-text);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(139, 90, 43, 0.25);
+  position: relative;
+}
+
+/* Cantoneiras ornamentadas */
+.parchment-card::after {
+  content: '⚓';
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 14px;
+  opacity: 0.4;
+  color: var(--parchment-border);
+}
+
+/* ==========================================================================
+   BOTÕES PIRATAS
+   ========================================================================== */
+
+.btn-pirate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-gold {
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+  color: #1a0d00;
+  border: 1px solid #fde68a;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(180deg, #fde047 0%, #f59e0b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-gold:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.4);
+}
+
+.btn-wood {
+  background: linear-gradient(180deg, #4a2d18 0%, #29180c 100%);
+  color: var(--parchment-bg);
+  border: 1px solid var(--wood-border);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn-wood:hover {
+  background: linear-gradient(180deg, #5c381e 0%, #3a2212 100%);
+  border-color: var(--gold-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-crimson {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  color: #fff;
+  border: 1px solid #f87171;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.5);
+}
+
+.btn-crimson:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   BOTÃO ÉPICO: GRITAR BINGO! 🏴‍☠️
+   ========================================================================== */
+
+.btn-shout-bingo {
+  background: linear-gradient(135deg, #ff0055 0%, #ff5500 50%, #ffbb00 100%);
+  color: #ffffff;
+  font-family: var(--font-pirate);
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  padding: 16px 36px;
+  border-radius: 50px;
+  border: 4px solid #fff;
+  box-shadow: 
+    0 0 25px rgba(255, 85, 0, 0.8),
+    0 0 60px rgba(255, 187, 0, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    0 8px 15px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: pulse-shout 2s infinite;
+  user-select: none;
+}
+
+.btn-shout-bingo:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 
+    0 0 35px rgba(255, 85, 0, 1),
+    0 0 80px rgba(255, 187, 0, 0.8),
+    inset 0 2px 0 rgba(255, 255, 255, 1);
+  background: linear-gradient(135deg, #ff1a6c 0%, #ff6b1a 50%, #ffd01a 100%);
+}
+
+.btn-shout-bingo:active {
+  transform: scale(0.96) translateY(2px);
+}
+
+@keyframes pulse-shout {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 85, 0, 0.7), 0 0 50px rgba(255, 187, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 85, 0, 1), 0 0 80px rgba(255, 187, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 85, 0, 0.7), 0 0 50px rgba(255, 187, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   GRADE DA CARTELA DE 30 NÚMEROS (5 LINHAS X 6 COLUNAS)
+   ========================================================================== */
+
+.bingo-grid-30 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+  background: rgba(44, 26, 14, 0.08);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--parchment-border);
+}
+
+.bingo-cell {
+  aspect-ratio: 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1.25rem;
+  background: #fff9ed;
+  color: #2c1a0e;
+  border: 2px solid #d4b886;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.bingo-cell:hover {
+  transform: translateY(-2px) scale(1.04);
+  border-color: var(--gold-primary);
+  background: #fffdf5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Célula Carimbada / Marcada */
+.bingo-cell.marked {
+  background: linear-gradient(135deg, #1c140e 0%, #2f1d10 100%);
+  color: var(--gold-light);
+  border-color: var(--gold-primary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 12px rgba(245, 158, 11, 0.4);
+  animation: stamp-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bingo-cell.marked::after {
+  content: '☠️';
+  position: absolute;
+  font-size: 1.1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.8));
+}
+
+.bingo-cell.marked span {
+  opacity: 0.35;
+  font-size: 0.85rem;
+  transform: translateY(10px);
+}
+
+/* Célula que foi sorteada mas ainda não marcada */
+.bingo-cell.drawn-unmarked {
+  border-color: #ef4444;
+  background: #fee2e2;
+  animation: pulse-border 1.5s infinite;
+}
+
+@keyframes stamp-pop {
+  0% { transform: scale(1.4) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* ==========================================================================
+   BOLA DE CANHÃO / SORTEIO
+   ========================================================================== */
+
+.cannon-ball-display {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #52525b 0%, #18181b 60%, #09090b 100%);
+  border: 4px solid var(--gold-light);
+  box-shadow: 
+    0 0 25px rgba(245, 158, 11, 0.6),
+    inset 0 0 20px rgba(0, 0, 0, 0.9),
+    0 15px 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 3.2rem;
+  position: relative;
+  user-select: none;
+  animation: float-ball 3s ease-in-out infinite;
+}
+
+.cannon-ball-display .ball-label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  position: absolute;
+  bottom: 12px;
+}
+
+@keyframes float-ball {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Animação de disparo do Canhão */
+.cannon-fire-anim {
+  animation: cannon-blast 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes cannon-blast {
+  0% { transform: scale(0.3) translateY(40px) rotate(-15deg); opacity: 0; }
+  50% { transform: scale(1.2) translateY(-10px) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) translateY(0) rotate(0deg); }
+}
+
+/* ==========================================================================
+   PAINEL DE TODAS AS 90 PEDRAS (MODERADOR E HISTÓRICO)
+   ========================================================================== */
+
+.number-board-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
+
+.board-num-badge {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #71717a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.board-num-badge.drawn {
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  color: #000;
+  font-weight: 900;
+  border-color: #fde047;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.board-num-badge.latest {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: #fff;
+  border-color: #fca5a5;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
+  animation: pulse-latest 1.2s infinite;
+}
+
+@keyframes pulse-latest {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ==========================================================================
+   CHAT PIRATA E LISTAS
+   ========================================================================== */
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  background: rgba(18, 11, 6, 0.95);
+  border: 1px solid var(--wood-border);
+  border-radius: var(--radius-sm);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  border-left: 3px solid var(--gold-primary);
+}
+
+.chat-bubble.system {
+  background: rgba(220, 38, 38, 0.15);
+  border-left-color: #ef4444;
+  font-style: italic;
+}
+
+.chat-bubble .sender {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   MODAL DE VITÓRIA BINGO PIRATA
+   ========================================================================== */
+
+.victory-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fade-in 0.3s ease-out;
+}
+
+.victory-card {
+  background: linear-gradient(180deg, #2a1608 0%, #120904 100%);
+  border: 3px solid var(--gold-light);
+  box-shadow: 
+    0 0 50px rgba(245, 158, 11, 0.8),
+    0 20px 40px rgba(0, 0, 0, 0.9);
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  width: 100%;
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  animation: victory-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes victory-pop {
+  0% { transform: scale(0.6) rotate(-5deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wood-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wood-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .bingo-grid-30 {
+    gap: 4px;
+    padding: 6px;
+  }
+  .bingo-cell {
+    font-size: 1rem;
+  }
+  .btn-shout-bingo {
+    font-size: 1.6rem;
+    padding: 12px 24px;
+  }
+  .cannon-ball-display {
+    width: 95px;
+    height: 95px;
+    font-size: 2.3rem;
+  }
+}

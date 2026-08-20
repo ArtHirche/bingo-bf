@@ -1,0 +1,23 @@
+# Dependências
+node_modules/
+client/node_modules/
+
+# Builds
+client/dist/
+dist/
+
+# Banco de Dados e Logs Locais
+server/bingo.db
+server/bingo.db-wal
+server/bingo.db-shm
+*.log
+
+# Variáveis de Ambiente
+.env
+.env.local
+
+# IDEs e Sistema Operacional
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
