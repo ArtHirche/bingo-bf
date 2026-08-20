@@ -233,5 +233,26 @@ export const soundEffects = {
       utterance.rate = 1.0;
       window.speechSynthesis.speak(utterance);
     } catch (e) {}
+  },
+
+  // Efeito suave de pop para novas mensagens do chat
+  playChatPop() {
+    if (isMuted) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(580, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.06);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch (e) {}
   }
 };

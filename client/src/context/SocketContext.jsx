@@ -106,6 +106,51 @@ export function SocketProvider({ children }) {
       setTimeout(() => setAlarmMessage(null), 6000);
     });
 
+    newSocket.on('chat_message', (chatMsg) => {
+      setCurrentRoom((prev) => {
+        if (!prev) return prev;
+        const currentChat = prev.chat || [];
+        if (currentChat.some((m) => m.id === chatMsg.id)) return prev;
+        return {
+          ...prev,
+          chat: [...currentChat, chatMsg]
+        };
+      });
+      soundEffects.playChatPop();
+    });
+
+    newSocket.on('game_started', ({ room, message }) => {
+      setCurrentRoom(room);
+      if (message) {
+        setToastMessage({ type: 'info', text: message });
+        setTimeout(() => setToastMessage(null), 4000);
+      }
+    });
+
+    newSocket.on('game_paused', ({ room, message }) => {
+      setCurrentRoom(room);
+      if (message) {
+        setToastMessage({ type: 'info', text: message });
+        setTimeout(() => setToastMessage(null), 4000);
+      }
+    });
+
+    newSocket.on('game_reset', ({ room, message }) => {
+      setCurrentRoom(room);
+      setLastDrawnNumber(null);
+      setVictoryData(null);
+      setAlarmMessage(null);
+      setMarkedNumbers({});
+      if (message) {
+        setToastMessage({ type: 'info', text: message });
+        setTimeout(() => setToastMessage(null), 4000);
+      }
+    });
+
+    newSocket.on('auto_draw_changed', ({ intervalSeconds, room }) => {
+      setCurrentRoom(room);
+    });
+
     newSocket.on('error_message', (msg) => {
       setToastMessage({ type: 'error', text: msg });
       setTimeout(() => setToastMessage(null), 4000);
