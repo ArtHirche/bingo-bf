@@ -16,7 +16,6 @@
     "vite": "^8.2.0"
   },
   "dependencies": {
-    "bingo": "file:..",
     "canvas-confetti": "^1.9.4",
     "lucide-react": "^1.32.0",
     "react": "^19.2.8",
