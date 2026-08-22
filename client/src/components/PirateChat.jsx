@@ -30,15 +30,14 @@ export default function PirateChat() {
   const { currentRoom, sendChat } = useSocket();
   const { user } = useAuth();
   const [inputText, setInputText] = useState('');
-  const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
 
   const messages = currentRoom?.chat || [];
 
-  // Rolar automaticamente para o final sempre que novas mensagens chegarem
+  // Rolar suavemente APENAS o interior da caixa de mensagens (sem mover a janela da página)
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages.length]);
 
@@ -55,15 +54,17 @@ export default function PirateChat() {
 
   return (
     <div 
-      className="pirate-panel" 
+      className="pirate-panel pirate-chat-panel" 
       style={{ 
-        padding: '16px', 
+        padding: '14px', 
         display: 'flex', 
         flexDirection: 'column', 
-        height: '460px',
+        height: '420px',
+        maxHeight: '80vh',
         background: 'linear-gradient(180deg, rgba(26, 17, 11, 0.95) 0%, rgba(13, 8, 5, 0.98) 100%)',
         border: '1px solid var(--wood-border)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)'
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
+        overscrollBehavior: 'contain'
       }}
     >
       
@@ -98,7 +99,7 @@ export default function PirateChat() {
       </div>
 
       {/* Emojis Rápidos Piratas */}
-      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '6px', marginBottom: '4px', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '6px', marginBottom: '4px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
         {QUICK_EMOJIS.map((emoji, idx) => (
           <button
             key={idx}
@@ -108,7 +109,9 @@ export default function PirateChat() {
             title={`Enviar ${emoji}`}
             style={{ 
               fontSize: '1rem', 
-              padding: '2px 8px', 
+              padding: '4px 8px', 
+              minHeight: '36px',
+              minWidth: '36px',
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(245, 158, 11, 0.25)',
               borderRadius: '8px',
@@ -124,7 +127,7 @@ export default function PirateChat() {
       </div>
 
       {/* Frases Rápidas Piratas */}
-      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '8px', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '8px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
         {QUICK_PHRASES.map((phrase, idx) => (
           <button
             key={idx}
@@ -132,8 +135,9 @@ export default function PirateChat() {
             onClick={() => handleQuickSend(phrase)}
             className="btn-pirate btn-wood"
             style={{ 
-              fontSize: '0.72rem', 
-              padding: '4px 10px', 
+              fontSize: '0.75rem', 
+              padding: '6px 12px', 
+              minHeight: '32px',
               whiteSpace: 'nowrap', 
               borderRadius: '12px',
               border: '1px solid var(--wood-border)',
@@ -160,7 +164,8 @@ export default function PirateChat() {
           background: 'rgba(0, 0, 0, 0.35)',
           borderRadius: '8px',
           padding: '10px',
-          border: '1px solid rgba(255, 255, 255, 0.05)'
+          border: '1px solid rgba(255, 255, 255, 0.05)',
+          overscrollBehavior: 'contain'
         }}
       >
         {messages.length === 0 ? (
@@ -222,7 +227,6 @@ export default function PirateChat() {
             );
           })
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Campo de Envio */}

@@ -50,6 +50,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -60,7 +67,7 @@ body {
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233a2212' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
   color: var(--bone-white);
   min-height: 100vh;
-  overflow-x: hidden;
+  min-height: 100dvh;
   line-height: 1.5;
 }
 
@@ -577,22 +584,209 @@ h1, h2, h3, .pirate-title {
   background: var(--gold-primary);
 }
 
-/* Responsividade */
+/* ==========================================================================
+   LAYOUTS RESPONSIVOS & GRIDS
+   ========================================================================== */
+
+.main-content-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  width: 100%;
+}
+
+.player-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(360px, 1fr) minmax(280px, 320px);
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+.moderator-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) 1fr minmax(280px, 340px);
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+
+.pirate-chat-panel {
+  height: 440px;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wood-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wood-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE: TABLETS E TELAS MÉDIAS (<= 1150px)
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .player-layout-grid {
+    grid-template-columns: minmax(280px, 340px) 1fr;
+  }
+  .player-layout-grid > *:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  .moderator-layout-grid {
+    grid-template-columns: minmax(300px, 360px) 1fr;
+  }
+  .moderator-layout-grid > *:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE: CELULARES (< 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
+  .main-content-container {
+    padding: 12px 8px;
+  }
+
+  .player-layout-grid,
+  .moderator-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pirate-chat-panel {
+    height: 380px;
+    max-height: 65vh;
+    padding: 10px !important;
+  }
+
+  .parchment-card {
+    padding: 14px 10px;
+    border-width: 2px;
+  }
+
   .bingo-grid-30 {
     gap: 4px;
     padding: 6px;
+    margin-top: 8px;
   }
+
   .bingo-cell {
+    font-size: 1.05rem;
+    min-height: 42px;
+    aspect-ratio: 1;
+    border-radius: 6px;
+  }
+
+  .bingo-cell.marked::after {
     font-size: 1rem;
   }
-  .btn-shout-bingo {
-    font-size: 1.6rem;
-    padding: 12px 24px;
+
+  .bingo-cell.marked span {
+    font-size: 0.75rem;
+    transform: translateY(8px);
   }
+
+  .number-board-grid {
+    gap: 3px;
+  }
+
+  .board-num-badge {
+    font-size: 0.72rem;
+    border-radius: 4px;
+    min-height: 24px;
+  }
+
   .cannon-ball-display {
     width: 95px;
     height: 95px;
-    font-size: 2.3rem;
+    font-size: 2.2rem;
+  }
+
+  .cannon-ball-display .ball-label {
+    font-size: 0.65rem;
+    bottom: 8px;
+  }
+
+  .btn-shout-bingo {
+    font-size: 1.35rem;
+    padding: 12px 18px;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .victory-card {
+    padding: 24px 16px;
   }
 }
+
+/* ==========================================================================
+   RESPONSIVIDADE: CELULARES COMPACTOS (<= 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .main-content-container {
+    padding: 8px 4px;
+  }
+
+  .pirate-panel {
+    border-radius: 8px;
+  }
+
+  .parchment-card {
+    padding: 10px 6px;
+  }
+
+  .bingo-grid-30 {
+    gap: 3px;
+    padding: 4px;
+  }
+
+  .bingo-cell {
+    font-size: 0.95rem;
+    min-height: 38px;
+    border-width: 1.5px;
+  }
+
+  .bingo-cell.marked::after {
+    font-size: 0.88rem;
+  }
+
+  .bingo-cell.marked span {
+    font-size: 0.68rem;
+    transform: translateY(7px);
+  }
+
+  .number-board-grid {
+    gap: 2px;
+  }
+
+  .board-num-badge {
+    font-size: 0.62rem;
+    border-radius: 3px;
+    min-height: 20px;
+  }
+
+  .cannon-ball-display {
+    width: 80px;
+    height: 80px;
+    font-size: 1.9rem;
+    border-width: 3px;
+  }
+
+  .btn-shout-bingo {
+    font-size: 1.15rem;
+    padding: 10px 14px;
+    letter-spacing: 1px;
+  }
+}
+

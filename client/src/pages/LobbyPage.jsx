@@ -25,40 +25,40 @@ export default function LobbyPage({ onEnterRoom }) {
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px' }}>
+    <div className="main-content-container" style={{ maxWidth: '1200px' }}>
       
       {/* Banner Principal do Navio Jack Down */}
-      <div className="pirate-panel" style={{ padding: '32px 24px', marginBottom: '28px', textAlign: 'center', background: 'linear-gradient(180deg, #3a2010 0%, #170d06 100%)' }}>
-        <h1 className="pirate-hero-font gold-gradient-text" style={{ fontSize: '3.2rem', marginBottom: '8px' }}>
+      <div className="pirate-panel" style={{ padding: 'clamp(20px, 4vw, 32px) clamp(14px, 3vw, 24px)', marginBottom: '20px', textAlign: 'center', background: 'linear-gradient(180deg, #3a2010 0%, #170d06 100%)' }}>
+        <h1 className="pirate-hero-font gold-gradient-text" style={{ fontSize: 'clamp(1.8rem, 6vw, 3.2rem)', marginBottom: '8px' }}>
           NAVIO JACK DOWN 🏴‍☠️
         </h1>
-        <p style={{ color: '#f5e6cb', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto 20px auto' }}>
+        <p style={{ color: '#f5e6cb', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', maxWidth: '700px', margin: '0 auto 18px auto' }}>
           Bem-vindo ao bando <strong style={{ color: 'var(--gold-light)' }}>Black Flags</strong>, {user?.role === 'moderator' ? '👑 Capitão' : 'marujo'} <strong style={{ color: 'var(--gold-light)' }}>{user?.username}</strong>!
         </p>
 
         {/* Botão de Embarque na Sala Única */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
           {user?.role === 'moderator' ? (
             <button
               onClick={handleJoin}
               className="btn-pirate btn-crimson"
-              style={{ fontSize: '1.2rem', padding: '16px 36px', borderRadius: '30px' }}
+              style={{ fontSize: '1.1rem', padding: '14px 28px', borderRadius: '30px' }}
             >
-              <Crown size={24} /> Assumir Comando do Jack Down 👑
+              <Crown size={22} /> Assumir Comando do Jack Down 👑
             </button>
           ) : (
             <button
               onClick={handleJoin}
               className="btn-pirate btn-gold"
-              style={{ fontSize: '1.2rem', padding: '16px 36px', borderRadius: '30px' }}
+              style={{ fontSize: '1.1rem', padding: '14px 28px', borderRadius: '30px' }}
             >
-              <Ship size={24} /> Subir ao Convés do Jack Down ⛵
+              <Ship size={22} /> Subir ao Convés do Jack Down ⛵
             </button>
           )}
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px' }}>
         
         {/* Painel: Informações da Sala Única Oficial */}
         <div className="pirate-panel" style={{ padding: '24px' }}>

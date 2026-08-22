@@ -6,15 +6,15 @@ export default function NumberBoard({ drawnNumbers = [], latestNumber = null }) 
   const allNumbers = Array.from({ length: 90 }, (_, i) => i + 1);
 
   return (
-    <div className="pirate-panel" style={{ padding: '18px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <LayoutGrid size={18} color="var(--gold-primary)" />
-          <h3 className="pirate-title" style={{ fontSize: '1rem', color: '#f3f4f6', textTransform: 'uppercase' }}>
+    <div className="pirate-panel" style={{ padding: '14px 12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', flexWrap: 'wrap', gap: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <LayoutGrid size={16} color="var(--gold-primary)" />
+          <h3 className="pirate-title" style={{ fontSize: '0.95rem', color: '#f3f4f6', textTransform: 'uppercase', margin: 0 }}>
             Painel das 90 Pedras
           </h3>
         </div>
-        <span style={{ fontSize: '0.8rem', color: '#b89868' }}>
+        <span style={{ fontSize: '0.75rem', color: '#b89868' }}>
           {drawnNumbers.length} Sorteadas / {90 - drawnNumbers.length} Restantes
         </span>
       </div>

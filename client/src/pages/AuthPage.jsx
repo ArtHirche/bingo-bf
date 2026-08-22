@@ -111,32 +111,32 @@ export default function AuthPage({ onLoginSuccess, initialMode = 'marujo' }) {
   };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 16px' }}>
-      <div className="pirate-panel" style={{ maxWidth: '520px', width: '100%', padding: '36px 28px', position: 'relative' }}>
+    <div style={{ minHeight: 'calc(100vh - 80px)', minHeight: 'calc(100dvh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 10px' }}>
+      <div className="pirate-panel" style={{ maxWidth: '520px', width: '100%', padding: 'clamp(20px, 4vw, 36px) clamp(14px, 4vw, 28px)', position: 'relative' }}>
         
         {/* Ícone de Topo */}
-        <div style={{ textAlign: 'center', marginBottom: '22px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '18px' }}>
           <div style={{
-            width: '68px',
-            height: '68px',
+            width: '60px',
+            height: '60px',
             borderRadius: '50%',
             background: mode === 'commander' 
               ? 'linear-gradient(135deg, #ef4444, #7f1d1d)' 
               : 'linear-gradient(135deg, #f59e0b, #b45309)',
-            margin: '0 auto 12px auto',
+            margin: '0 auto 10px auto',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             border: '2px solid var(--gold-light)',
-            boxShadow: mode === 'commander' ? '0 0 25px rgba(239, 68, 68, 0.5)' : '0 0 25px rgba(245, 158, 11, 0.4)'
+            boxShadow: mode === 'commander' ? '0 0 20px rgba(239, 68, 68, 0.5)' : '0 0 20px rgba(245, 158, 11, 0.4)'
           }}>
-            {mode === 'commander' ? <Crown size={36} color="#fde047" /> : <Ship size={36} color="#120b06" />}
+            {mode === 'commander' ? <Crown size={32} color="#fde047" /> : <Ship size={32} color="#120b06" />}
           </div>
 
-          <h2 className="pirate-title gold-gradient-text" style={{ fontSize: '2rem', marginBottom: '6px' }}>
+          <h2 className="pirate-title gold-gradient-text" style={{ fontSize: 'clamp(1.35rem, 4.5vw, 1.9rem)', marginBottom: '4px' }}>
             {mode === 'commander' ? 'Cabine do Comandante' : 'Embarque no Jack Down'}
           </h2>
-          <p style={{ fontSize: '0.9rem', color: '#dfc89f' }}>
+          <p style={{ fontSize: '0.85rem', color: '#dfc89f' }}>
             {mode === 'commander' 
               ? 'Acesso exclusivo para o anfitrião controlar os canhões e o sorteio.' 
               : 'Digite seu apelido pirata e suba a bordo para jogar em tempo real!'}

@@ -159,15 +159,15 @@ export default function PirateCard({ card, drawnNumbers = [] }) {
     : 0;
 
   return (
-    <div className="parchment-card" style={{ padding: '20px', maxWidth: '560px', width: '100%', margin: '0 auto 24px auto' }}>
+    <div className="parchment-card" style={{ maxWidth: '560px', width: '100%', margin: '0 auto 20px auto' }}>
       
       {/* Cabeçalho da Cartela */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', borderBottom: '2px dashed var(--parchment-border)', paddingBottom: '12px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', borderBottom: '2px dashed var(--parchment-border)', paddingBottom: '10px' }}>
         <div>
-          <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#78350f', fontWeight: 'bold' }}>
+          <span style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#78350f', fontWeight: 'bold' }}>
             Mapa do Tesouro
           </span>
-          <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.15rem', color: '#2c1a0e', margin: '2px 0 0 0' }}>
+          <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.1rem', color: '#2c1a0e', margin: '2px 0 0 0' }}>
             {card.serialNumber}
           </h4>
         </div>
@@ -175,20 +175,20 @@ export default function PirateCard({ card, drawnNumbers = [] }) {
         {/* Status da Melhor Linha e Marcados */}
         <div style={{ textAlign: 'right' }}>
           {lineStats.hasBingo ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#16a34a', color: '#fff', padding: '4px 10px', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', animation: 'pulse 1s infinite' }}>
-              <Trophy size={16} /> LINHA COMPLETA!
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#16a34a', color: '#fff', padding: '4px 8px', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.8rem', animation: 'pulse 1s infinite' }}>
+              <Trophy size={15} /> LINHA COMPLETA!
             </div>
           ) : (
             <div>
-              <span style={{ fontSize: '0.75rem', color: '#78350f', fontWeight: 'bold' }}>
+              <span style={{ fontSize: '0.72rem', color: '#78350f', fontWeight: 'bold' }}>
                 Melhor Linha ({lineStats.bestLine?.name || 'Geral'}):
               </span>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '6px' }}>
-                <span style={{ fontFamily: 'var(--font-title)', fontSize: '1.15rem', fontWeight: '900', color: lineStats.bestLine?.missingCount <= 1 ? '#dc2626' : '#2c1a0e' }}>
+                <span style={{ fontFamily: 'var(--font-title)', fontSize: '1.1rem', fontWeight: '900', color: lineStats.bestLine?.missingCount <= 1 ? '#dc2626' : '#2c1a0e' }}>
                   {lineStats.bestLine?.drawnCount || 0} / {lineStats.bestLine?.totalRequired || 5}
                 </span>
                 {lineStats.bestLine?.missingCount === 1 && (
-                  <span style={{ fontSize: '0.75rem', color: '#dc2626', fontWeight: 'bold' }}>🔥 Falta 1!</span>
+                  <span style={{ fontSize: '0.72rem', color: '#dc2626', fontWeight: 'bold' }}>🔥 Falta 1!</span>
                 )}
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function PirateCard({ card, drawnNumbers = [] }) {
       </div>
 
       {/* Barra de Progresso da Melhor Linha */}
-      <div style={{ width: '100%', height: '8px', background: 'rgba(0,0,0,0.15)', borderRadius: '4px', margin: '12px 0 8px 0', overflow: 'hidden' }}>
+      <div style={{ width: '100%', height: '7px', background: 'rgba(0,0,0,0.15)', borderRadius: '4px', margin: '10px 0 6px 0', overflow: 'hidden' }}>
         <div 
           style={{ 
             width: `${bestLineProgressPercent}%`, 
@@ -211,16 +211,16 @@ export default function PirateCard({ card, drawnNumbers = [] }) {
       </div>
 
       {/* Legenda de Regra */}
-      <div style={{ fontSize: '0.74rem', color: '#78350f', marginBottom: '8px', textAlign: 'center', fontWeight: '600' }}>
+      <div style={{ fontSize: '0.72rem', color: '#78350f', marginBottom: '6px', textAlign: 'center', fontWeight: '600' }}>
         ⚔️ Regra: Complete qualquer <strong>Linha Horizontal</strong> (6), <strong>Vertical</strong> (5) ou <strong>Diagonal</strong> (5)!
       </div>
 
       {/* Cabeçalhos das Colunas */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px', textAlign: 'center', marginTop: '6px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px', textAlign: 'center', marginTop: '4px' }}>
         {colRanges.map((range, idx) => (
-          <div key={idx} style={{ fontSize: '0.7rem', fontWeight: 'bold', color: '#78350f', letterSpacing: '0.5px' }}>
+          <div key={idx} style={{ fontSize: '0.68rem', fontWeight: 'bold', color: '#78350f', letterSpacing: '0.3px', lineHeight: 1.2 }}>
             Col {idx + 1}
-            <div style={{ fontSize: '0.65rem', opacity: 0.75 }}>({range})</div>
+            <div style={{ fontSize: '0.6rem', opacity: 0.8 }}>({range})</div>
           </div>
         ))}
       </div>

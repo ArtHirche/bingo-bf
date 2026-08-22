@@ -37,43 +37,43 @@ export default function PlayerPage({ roomId, onLeaveRoom }) {
   const activeCard = myCards[activeCardIndex] || myCards[0];
 
   return (
-    <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px 16px' }}>
+    <div className="main-content-container">
       
       {/* Top Header do Marujo */}
-      <div className="pirate-panel" style={{ padding: '14px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div className="pirate-panel" style={{ padding: '12px 16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
           <button 
             onClick={onLeaveRoom}
             className="btn-pirate btn-wood"
-            style={{ padding: '8px 12px', fontSize: '0.85rem' }}
+            style={{ padding: '6px 12px', fontSize: '0.82rem' }}
           >
-            <ArrowLeft size={16} /> Voltar ao Porto
+            <ArrowLeft size={15} /> Voltar ao Porto
           </button>
           <div>
-            <h2 className="pirate-title gold-gradient-text" style={{ fontSize: '1.3rem', margin: 0 }}>
+            <h2 className="pirate-title gold-gradient-text" style={{ fontSize: '1.2rem', margin: 0 }}>
               Convés do Jack Down ⛵
             </h2>
-            <span style={{ fontSize: '0.8rem', color: '#b89868' }}>
-              Sala: <strong>{roomId}</strong> • Bando <strong>Black Flags</strong> • Capitão: {currentRoom?.moderatorName || 'Barba-Negra'}
+            <span style={{ fontSize: '0.78rem', color: '#b89868' }}>
+              Sala: <strong>{roomId}</strong> • Capitão: <strong>{currentRoom?.moderatorName || 'Barba-Negra'}</strong>
             </span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {status === 'in_progress' ? (
-            <span style={{ background: '#16a34a', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>🟢 Sorteio em Andamento</span>
+            <span style={{ background: '#16a34a', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 'bold' }}>🟢 Sorteio em Andamento</span>
           ) : status === 'paused' ? (
-            <span style={{ background: '#d97706', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>⏸️ Pausado</span>
+            <span style={{ background: '#d97706', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 'bold' }}>⏸️ Pausado</span>
           ) : status === 'finished' ? (
-            <span style={{ background: '#dc2626', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>🏆 Bingo Conquistado!</span>
+            <span style={{ background: '#dc2626', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 'bold' }}>🏆 Bingo Conquistado!</span>
           ) : (
-            <span style={{ background: '#4b5563', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>⏳ Aguardando o Capitão</span>
+            <span style={{ background: '#4b5563', color: '#fff', padding: '4px 10px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 'bold' }}>⏳ Aguardando o Capitão</span>
           )}
         </div>
       </div>
 
       {/* Grid Principal do Jogador */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) minmax(360px, 1fr) minmax(280px, 320px)', gap: '20px', alignItems: 'start' }}>
+      <div className="player-layout-grid">
         
         {/* Coluna Esquerda: Canhão de Sorteio e Referência */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>

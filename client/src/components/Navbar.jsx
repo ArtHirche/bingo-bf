@@ -31,33 +31,34 @@ export default function Navbar({ onNavigate, currentView, roomId }) {
   };
 
   return (
-    <header className="pirate-panel" style={{ borderRadius: 0, borderTop: 'none', borderLeft: 'none', borderRight: 'none', padding: '12px 24px' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+    <header className="pirate-panel" style={{ borderRadius: 0, borderTop: 'none', borderLeft: 'none', borderRight: 'none', padding: '10px 16px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
         
         {/* Logo / Título */}
         <div 
           onClick={() => onNavigate('lobby')} 
-          style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
         >
           <div style={{ 
-            width: '42px', 
-            height: '42px', 
+            width: '36px', 
+            height: '36px', 
             borderRadius: '50%', 
             background: 'linear-gradient(135deg, #f59e0b, #b45309)',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
-            boxShadow: '0 0 15px rgba(245, 158, 11, 0.5)',
-            border: '2px solid #fde047'
+            boxShadow: '0 0 12px rgba(245, 158, 11, 0.5)',
+            border: '2px solid #fde047',
+            flexShrink: 0
           }}>
-            <Compass size={26} color="#120b06" strokeWidth={2.5} />
+            <Compass size={22} color="#120b06" strokeWidth={2.5} />
           </div>
           <div>
-            <h1 className="pirate-hero-font gold-gradient-text" style={{ fontSize: '1.75rem', lineHeight: 1 }}>
+            <h1 className="pirate-hero-font gold-gradient-text" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', lineHeight: 1, margin: 0 }}>
               BINGO PIRATA
             </h1>
-            <span style={{ fontSize: '0.75rem', color: '#b89868', letterSpacing: '1px', textTransform: 'uppercase' }}>
-              Bando Black Flags • Navio Jack Down
+            <span style={{ fontSize: '0.68rem', color: '#b89868', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+              Navio Jack Down 🏴‍☠️
             </span>
           </div>
         </div>

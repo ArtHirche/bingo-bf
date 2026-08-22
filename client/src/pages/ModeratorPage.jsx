@@ -56,27 +56,27 @@ export default function ModeratorPage({ roomId, onLeaveRoom }) {
   };
 
   return (
-    <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px 16px' }}>
+    <div className="main-content-container">
       
       {/* Top Header do Capitão */}
-      <div className="pirate-panel" style={{ padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div className="pirate-panel" style={{ padding: '12px 16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
           <button 
             onClick={onLeaveRoom}
             className="btn-pirate btn-wood"
-            style={{ padding: '8px 12px', fontSize: '0.85rem' }}
+            style={{ padding: '6px 12px', fontSize: '0.82rem' }}
           >
-            <ArrowLeft size={16} /> Voltar ao Porto
+            <ArrowLeft size={15} /> Voltar ao Porto
           </button>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Crown size={22} color="var(--gold-primary)" />
-              <h2 className="pirate-title gold-gradient-text" style={{ fontSize: '1.4rem', margin: 0 }}>
+              <Crown size={20} color="var(--gold-primary)" />
+              <h2 className="pirate-title gold-gradient-text" style={{ fontSize: '1.2rem', margin: 0 }}>
                 Cabine de Comando • Navio Jack Down
               </h2>
             </div>
-            <span style={{ fontSize: '0.8rem', color: '#b89868' }}>
-              Sala: <strong>{roomId}</strong> • Bando <strong>Black Flags</strong> • Capitão Oficial
+            <span style={{ fontSize: '0.78rem', color: '#b89868' }}>
+              Sala: <strong>{roomId}</strong> • Capitão Oficial
             </span>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function ModeratorPage({ roomId, onLeaveRoom }) {
       </div>
 
       {/* Grid Principal */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 380px) 1fr minmax(280px, 340px)', gap: '20px', alignItems: 'start' }}>
+      <div className="moderator-layout-grid">
         
         {/* Coluna Esquerda: Canhão e Painel de Controle de Sorteio */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
