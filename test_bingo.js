@@ -42,45 +42,68 @@ for (let i = 1; i <= 10; i++) {
 }
 console.log('  ✅ Sorteio de Pedras: OK!\n');
 
-// 4. Testar Validação de BINGO! (Alarme Falso vs Bingo Real)
-console.log('4. Testando Validação de BINGO:');
+// 4. Testar Validação de BINGO por Linha (Alarme Falso vs Horizontal vs Vertical vs Diagonal)
+console.log('4. Testando Validação de BINGO por Linha:');
 const playerUser = users.find(u => u.role === 'player');
-// Adicionar jogador à sala com a cartela de teste
-room.players.set('socket_fake_123', {
-  socketId: 'socket_fake_123',
+room.players.set('socket_fake_test', {
+  socketId: 'socket_fake_test',
   userId: playerUser.id,
   username: playerUser.username,
   cards: [card]
 });
 
-// Teste 4.1: Alarme Falso (apenas 10 pedras foram sorteadas)
+// Teste 4.1: Alarme Falso (poucas pedras sorteadas, nenhuma linha completa)
+room.drawnNumbers = [999]; // Apenas número inexistente
 const falseClaim = gameManager.claimBingo(room.id, playerUser.id, card.id);
-console.log('  - Tentativa de Bingo prematuro (Alarme Falso):');
+console.log('  - 4.1 Tentativa de Bingo prematuro (Alarme Falso):');
 console.log('    * Válido?', falseClaim.valid);
 console.log('    * Mensagem:', falseClaim.message);
-console.log('    * Pedras acertadas:', falseClaim.matchedCount, '/ 30');
 
 if (falseClaim.valid === true) {
   throw new Error('Falha: Bingo falso foi aceito incorretamente!');
 }
 console.log('  ✅ Alarme Falso detectado com sucesso!\n');
 
-// Teste 4.2: Bingo Real (simular que todos os 30 números da cartela foram sorteados)
-console.log('  - Simulando sorteio de todas as pedras da cartela...');
-card.numbers.forEach(num => {
-  if (!room.drawnNumbers.includes(num)) {
-    room.drawnNumbers.push(num);
-  }
-});
-const realClaim = gameManager.claimBingo(room.id, playerUser.id, card.id);
-console.log('  - Tentativa de Bingo com 30 pedras completas:');
-console.log('    * Válido?', realClaim.valid);
-console.log('    * Mensagem:', realClaim.message);
-console.log('    * Vencedor registrado:', realClaim.winner?.username);
+// Teste 4.2: Bingo com Linha Horizontal 1 (6 números da linha 0 da matriz)
+console.log('  - 4.2 Testando Vitória por Linha Horizontal 1:');
+room.status = 'in_progress';
+room.drawnNumbers = [...card.matrix[0]]; // Linha 0 completa
+const horizClaim = gameManager.claimBingo(room.id, playerUser.id, card.id);
+console.log('    * Válido?', horizClaim.valid);
+console.log('    * Mensagem:', horizClaim.message);
+console.log('    * Linha:', horizClaim.winningLine?.name);
 
-if (realClaim.valid !== true) {
-  throw new Error('Falha: Bingo legítimo não foi validado!');
+if (horizClaim.valid !== true || horizClaim.winningLine?.type !== 'horizontal') {
+  throw new Error('Falha: Linha Horizontal não validou o Bingo!');
 }
-console.log('  ✅ Bingo Legítimo validado com glória pirata!\n');
+console.log('  ✅ Vitória por Linha Horizontal validada com sucesso!\n');
 
-console.log('🎉 TODOS OS TESTES PASSARAM COM SUCESSO ABSOLUTO! 🎉');
+// Teste 4.3: Bingo com Coluna Vertical 1 (5 números da coluna 0 da matriz)
+console.log('  - 4.3 Testando Vitória por Coluna Vertical 1:');
+room.status = 'in_progress';
+room.drawnNumbers = [card.matrix[0][0], card.matrix[1][0], card.matrix[2][0], card.matrix[3][0], card.matrix[4][0]];
+const vertClaim = gameManager.claimBingo(room.id, playerUser.id, card.id);
+console.log('    * Válido?', vertClaim.valid);
+console.log('    * Mensagem:', vertClaim.message);
+console.log('    * Coluna:', vertClaim.winningLine?.name);
+
+if (vertClaim.valid !== true || vertClaim.winningLine?.type !== 'vertical') {
+  throw new Error('Falha: Coluna Vertical não validou o Bingo!');
+}
+console.log('  ✅ Vitória por Coluna Vertical validada com sucesso!\n');
+
+// Teste 4.4: Bingo com Linha Diagonal Principal (5 números diagonais)
+console.log('  - 4.4 Testando Vitória por Linha Diagonal:');
+room.status = 'in_progress';
+room.drawnNumbers = [card.matrix[0][0], card.matrix[1][1], card.matrix[2][2], card.matrix[3][3], card.matrix[4][4]];
+const diagClaim = gameManager.claimBingo(room.id, playerUser.id, card.id);
+console.log('    * Válido?', diagClaim.valid);
+console.log('    * Mensagem:', diagClaim.message);
+console.log('    * Diagonal:', diagClaim.winningLine?.name);
+
+if (diagClaim.valid !== true || diagClaim.winningLine?.type !== 'diagonal') {
+  throw new Error('Falha: Linha Diagonal não validou o Bingo!');
+}
+console.log('  ✅ Vitória por Linha Diagonal validada com sucesso!\n');
+
+console.log('🎉 TODOS OS TESTES DE LINHA PASSARAM COM SUCESSO ABSOLUTO! 🎉');

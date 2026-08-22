@@ -74,6 +74,11 @@ export default function VictoryModal() {
           <div style={{ fontSize: '0.85rem', color: '#d1d5db' }}>
             Cartela Vencedora: <strong style={{ color: 'var(--gold-light)' }}>{victoryData.cardSerial || 'TESOURO SUPREMO'}</strong>
           </div>
+          {victoryData.winningLine && (
+            <div style={{ fontSize: '0.9rem', color: '#22c55e', marginTop: '6px', fontWeight: 'bold' }}>
+              ⚔️ {victoryData.winningLine} Completa!
+            </div>
+          )}
           <div style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '4px' }}>
             Pedras Sorteadas na Rodada: <strong>{victoryData.totalDrawn}</strong>
           </div>

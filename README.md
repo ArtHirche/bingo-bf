@@ -38,7 +38,7 @@ O jogo utiliza cartelas clássicas de **30 números** (grade 5x6 balanceada no i
 - **Até 2 Cartelas por Marujo**: Cada jogador joga com 1 ou até 2 cartelas simultâneas de 30 pedras com alternância rápida em abas.
 
 ### 💰 3. O Botão "GRITAR BINGO! 🏴‍☠️" e Validação Server-Side
-- **Validação Segura**: O servidor SQLite + Socket.IO confere se todas as 30 pedras da cartela foram realmente sorteadas.
+- **Validação Segura por Linha**: O servidor SQLite + Socket.IO valida a conclusão de qualquer linha perfeita (Horizontal de 6 pedras, Vertical de 5 pedras ou Diagonal de 5 pedras).
 - **Vitória Legítima**:
   - Chuva torrencial de moedas de ouro e confetes na tela de todos os participantes.
   - Fanfarra triunfal sintetizada via Web Audio API.
@@ -126,5 +126,4 @@ Você pode clicar nos botões de acesso rápido na tela de login ou utilizar as 
 
 ## 📜 Licença
 
-Este projeto é software livre dedicado ao domínio público sob a licença **[The Unlicense](file:///c:/projects/bingo/LICENSE)** (equivalente ao CC0 / Domínio Público). Sinta-se livre para copiar, modificar, estudar e navegar por novos mares de forma ética e responsável! 🏴‍☠️
-
+Este projeto é software livre dedicado ao domínio público sob a licença **[The Unlicense](https://unlicense.org/)** (equivalente ao CC0 / Domínio Público). Veja o arquivo [LICENSE](/LICENSE) para mais detalhes. Sinta-se livre para copiar, modificar, estudar e navegar por novos mares de forma ética e responsável! 🏴‍☠️

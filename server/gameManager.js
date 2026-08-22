@@ -97,7 +97,7 @@ class GameManager {
         players: new Map(), // socketId -> playerData
         chat: [],
         winner: winnerName ? { winnerName } : null,
-        bingoMode: 'full_card' // 'full_card' (30 números) ou 'line' (linha completa)
+        bingoMode: 'line' // 'line' (linha horizontal, vertical ou diagonal)
       });
     }
 
@@ -200,7 +200,156 @@ class GameManager {
     return { success: true, drawn, totalDrawn: room.drawnNumbers.length, room };
   }
 
-  // Validação de BINGO!
+  // Verifica todas as linhas (horizontais, verticais e diagonais) de uma matriz 5x6
+  checkWinningLines(matrix, drawnNumbers) {
+    const drawnSet = new Set(drawnNumbers);
+    const rows = matrix.length; // 5 linhas
+    const cols = matrix[0].length; // 6 colunas
+    const allLines = [];
+
+    // 1. Linhas Horizontais (5 linhas de 6 números)
+    for (let r = 0; r < rows; r++) {
+      const numbers = matrix[r];
+      const drawn = numbers.filter(n => drawnSet.has(n));
+      const missing = numbers.filter(n => !drawnSet.has(n));
+      allLines.push({
+        type: 'horizontal',
+        name: `Linha Horizontal ${r + 1}`,
+        numbers,
+        drawnCount: drawn.length,
+        totalRequired: cols,
+        missingCount: missing.length,
+        missingNumbers: missing,
+        isComplete: missing.length === 0,
+        indices: numbers.map((_, c) => ({ r, c }))
+      });
+    }
+
+    // 2. Linhas Verticais / Colunas (6 colunas de 5 números)
+    for (let c = 0; c < cols; c++) {
+      const numbers = [];
+      const indices = [];
+      for (let r = 0; r < rows; r++) {
+        numbers.push(matrix[r][c]);
+        indices.push({ r, c });
+      }
+      const drawn = numbers.filter(n => drawnSet.has(n));
+      const missing = numbers.filter(n => !drawnSet.has(n));
+      allLines.push({
+        type: 'vertical',
+        name: `Coluna Vertical ${c + 1}`,
+        numbers,
+        drawnCount: drawn.length,
+        totalRequired: rows,
+        missingCount: missing.length,
+        missingNumbers: missing,
+        isComplete: missing.length === 0,
+        indices
+      });
+    }
+
+    // 3. Linhas Diagonais (4 diagonais possíveis de tamanho 5 em grade 5x6)
+    // Diagonal Principal 1 (Colunas 0 a 4)
+    const diag1 = [];
+    const diag1Indices = [];
+    for (let r = 0; r < rows; r++) {
+      diag1.push(matrix[r][r]);
+      diag1Indices.push({ r, c: r });
+    }
+    const diag1Drawn = diag1.filter(n => drawnSet.has(n));
+    const diag1Missing = diag1.filter(n => !drawnSet.has(n));
+    allLines.push({
+      type: 'diagonal',
+      name: 'Diagonal Principal (Esq ➔ Dir)',
+      numbers: diag1,
+      drawnCount: diag1Drawn.length,
+      totalRequired: rows,
+      missingCount: diag1Missing.length,
+      missingNumbers: diag1Missing,
+      isComplete: diag1Missing.length === 0,
+      indices: diag1Indices
+    });
+
+    // Diagonal Principal 2 (Colunas 1 a 5)
+    const diag2 = [];
+    const diag2Indices = [];
+    for (let r = 0; r < rows; r++) {
+      diag2.push(matrix[r][r + 1]);
+      diag2Indices.push({ r, c: r + 1 });
+    }
+    const diag2Drawn = diag2.filter(n => drawnSet.has(n));
+    const diag2Missing = diag2.filter(n => !drawnSet.has(n));
+    allLines.push({
+      type: 'diagonal',
+      name: 'Diagonal Secundária (Esq ➔ Dir)',
+      numbers: diag2,
+      drawnCount: diag2Drawn.length,
+      totalRequired: rows,
+      missingCount: diag2Missing.length,
+      missingNumbers: diag2Missing,
+      isComplete: diag2Missing.length === 0,
+      indices: diag2Indices
+    });
+
+    // Diagonal Inversa 1 (Colunas 5 a 1)
+    const anti1 = [];
+    const anti1Indices = [];
+    for (let r = 0; r < rows; r++) {
+      const c = 5 - r;
+      anti1.push(matrix[r][c]);
+      anti1Indices.push({ r, c });
+    }
+    const anti1Drawn = anti1.filter(n => drawnSet.has(n));
+    const anti1Missing = anti1.filter(n => !drawnSet.has(n));
+    allLines.push({
+      type: 'diagonal',
+      name: 'Diagonal Inversa 1 (Dir ➔ Esq)',
+      numbers: anti1,
+      drawnCount: anti1Drawn.length,
+      totalRequired: rows,
+      missingCount: anti1Missing.length,
+      missingNumbers: anti1Missing,
+      isComplete: anti1Missing.length === 0,
+      indices: anti1Indices
+    });
+
+    // Diagonal Inversa 2 (Colunas 4 a 0)
+    const anti2 = [];
+    const anti2Indices = [];
+    for (let r = 0; r < rows; r++) {
+      const c = 4 - r;
+      anti2.push(matrix[r][c]);
+      anti2Indices.push({ r, c });
+    }
+    const anti2Drawn = anti2.filter(n => drawnSet.has(n));
+    const anti2Missing = anti2.filter(n => !drawnSet.has(n));
+    allLines.push({
+      type: 'diagonal',
+      name: 'Diagonal Inversa 2 (Dir ➔ Esq)',
+      numbers: anti2,
+      drawnCount: anti2Drawn.length,
+      totalRequired: rows,
+      missingCount: anti2Missing.length,
+      missingNumbers: anti2Missing,
+      isComplete: anti2Missing.length === 0,
+      indices: anti2Indices
+    });
+
+    const completedLines = allLines.filter(l => l.isComplete);
+    // Ordenar linhas pela proximidade da conclusão (menor missingCount)
+    allLines.sort((a, b) => a.missingCount - b.missingCount);
+    const closestLine = allLines[0];
+
+    return {
+      hasBingo: completedLines.length > 0,
+      completedLines,
+      winningLine: completedLines[0] || null,
+      closestLine,
+      allLines
+    };
+  }
+
+  // Validação de BINGO! (Regra: Completar qualquer linha horizontal, vertical ou diagonal)
   claimBingo(roomId, userId, cardId) {
     const room = this.getRoom(roomId);
     if (!room) return { valid: false, message: 'Sala não encontrada!' };
@@ -225,17 +374,12 @@ class GameManager {
       return { valid: false, message: 'Cartela do marujo não encontrada!' };
     }
 
-    const drawnSet = new Set(room.drawnNumbers);
-    const cardNumbers = foundCard.numbers; // Array de 30 números
+    // Validar se há alguma linha perfeita completa (horizontal, vertical ou diagonal)
+    const evaluation = this.checkWinningLines(foundCard.matrix, room.drawnNumbers);
 
-    // Conferir quantos números da cartela foram sorteados
-    const markedDrawnNumbers = cardNumbers.filter(n => drawnSet.has(n));
-    const missingNumbers = cardNumbers.filter(n => !drawnSet.has(n));
+    if (evaluation.hasBingo) {
+      const winningLine = evaluation.winningLine;
 
-    // Regra: Cartela Cheia (todos os 30 números sorteados)
-    const isFullBingo = markedDrawnNumbers.length === 30;
-
-    if (isFullBingo) {
       // Parar sorteio automático se houver
       if (room.timer) {
         clearInterval(room.timer);
@@ -250,6 +394,8 @@ class GameManager {
         avatar: winnerAvatar,
         title: foundPlayer.title || 'Mestre dos Mares',
         cardSerial: foundCard.serialNumber,
+        winningLine: winningLine.name,
+        winningNumbers: winningLine.numbers,
         totalDrawn: room.drawnNumbers.length,
         timestamp: new Date().toISOString()
       };
@@ -280,18 +426,21 @@ class GameManager {
       return {
         valid: true,
         winner: winnerData,
-        matchedCount: 30,
-        totalRequired: 30,
-        message: `ARRR! BINGO LEGÍTIMO! ${foundPlayer.username} conquistou o baú do tesouro!`
+        winningLine,
+        matchedCount: winningLine.numbers.length,
+        totalRequired: winningLine.totalRequired,
+        message: `ARRR! BINGO LEGÍTIMO! ${foundPlayer.username} completou ${winningLine.name} (${winningLine.numbers.join(', ')})!`
       };
     } else {
+      const best = evaluation.closestLine;
       return {
         valid: false,
-        matchedCount: markedDrawnNumbers.length,
-        totalRequired: 30,
-        missingCount: missingNumbers.length,
-        missingNumbers: missingNumbers.slice(0, 5), // Primeiros 5 que faltaram para dar feedback
-        message: `Alarme falso, Marujo ${foundPlayer.username}! Faltam ${missingNumbers.length} pedras para o tesouro completo!`
+        closestLine: best.name,
+        missingCount: best.missingCount,
+        missingNumbers: best.missingNumbers,
+        matchedCount: best.drawnCount,
+        totalRequired: best.totalRequired,
+        message: `Alarme falso, Marujo ${foundPlayer.username}! Nenhuma linha completa. Falta(m) ${best.missingCount} pedra(s) na ${best.name}!`
       };
     }
   }

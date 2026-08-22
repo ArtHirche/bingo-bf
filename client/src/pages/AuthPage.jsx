@@ -355,9 +355,6 @@ export default function AuthPage({ onLoginSuccess, initialMode = 'marujo' }) {
                 />
                 <KeyRound size={20} color="#ef4444" style={{ position: 'absolute', left: '12px', top: '14px' }} />
               </div>
-              <div style={{ fontSize: '0.76rem', color: '#9ca3af', marginTop: '6px' }}>
-                💡 Dica: Chave padrão inicial: <code style={{ color: 'var(--gold-light)' }}>capitao123</code> (ou defina no <code>.env</code> com <code>COMMANDER_KEY</code>).
-              </div>
             </div>
 
             {/* Nome do Capitão (Opcional) */}

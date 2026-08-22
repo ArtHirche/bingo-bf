@@ -114,7 +114,7 @@ export default function LobbyPage({ onEnterRoom }) {
               <strong>1 Capitão Oficial:</strong> Apenas o Administrador oficial dispara as pedras de canhão e comanda o ritmo das rodadas.
             </li>
             <li>
-              <strong>Gritar BINGO:</strong> Complete as 30 pedras de uma cartela para conquistar o baú do tesouro com 500 moedas de ouro!
+              <strong>Gritar BINGO:</strong> Complete qualquer linha perfeita (Horizontal, Vertical ou Diagonal) em sua cartela para conquistar o baú do tesouro com 500 moedas de ouro!
             </li>
           </ul>
         </div>
